@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <label *ngIf="label" class="inline-block mb-2">{{ label }}</label>
+  <input
+    [type]="type"
+    [formControl]="control"
+    class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+    [placeholder]="placeholder"
+    [mask]="type === 'number' ? '00' : format"
+    [dropSpecialCharacters]="false"
+  />
+
+  <ng-container *ngIf="control.touched && control.dirty">
+    <small *ngIf="control.errors?.['required']" class="text-rose-400"
+      >Field is required</small
+    >
+
+    <small class="text-rose-400" *ngIf="control.errors?.['minlength']"
+      >The value is just
+      {{ control.errors?.['minlength']['actualLength'] }} characters long. It
+      must be at least
+      {{ control.errors?.['minlength']['requiredLength'] }} characters
+      long.</small
+    >
+    <small *ngIf="control.errors?.['email']" class="text-rose-400"
+      >You must enter a valid email.</small
+    >
+    <small *ngIf="control.errors?.['min']" class="text-rose-400"
+      >value is too low.</small
+    >
+    <small *ngIf="control.errors?.['max']" class="text-rose-400"
+      >value is too high.</small
+    >
+    <small *ngIf="control.errors?.['noMatch']" class="text-rose-400"
+      >Passwords do not mismatch.</small
+    >
+    <small *ngIf="control.errors?.['emailExists']" class="text-rose-400"
+      >Email is already taken.</small
+    >
+  </ng-container>
+</div>
